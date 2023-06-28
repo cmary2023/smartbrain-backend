@@ -1,23 +1,28 @@
 {
   "name": "node",
+  "homepage":"https://github.com/cmary2023/smartbrain-backend.git",
   "version": "1.0.0",
   "main": "script.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "predeploy": "npm run build",
+    "deploy":"gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcrypt-nodejs": "0.0.3",
-    "body-parser": "^1.20.0",
+    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
-    "express": "^4.18.1",
-    "knex": "^2.3.0",
-    "pg": "^8.8.0"
+    "express": "^4.18.2",
+    "knex": "^2.4.2",
+    "pg": "^8.11.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "gh-pages": "^5.0.0",
+    "nodemon": "^2.0.22"
   },
   "description": ""
 }

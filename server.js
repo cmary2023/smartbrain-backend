@@ -8,10 +8,11 @@ const db = knex({
   // Enter your own database information here based on what you created
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'aneagoie',
-    password : '',
-    database : 'smart-brain'
+    host: "localhost",
+    port:5432,
+    user: "postgres",
+    password: "test",
+    database: "smartdb"
   }
 });
 
@@ -37,12 +38,12 @@ app.post('/signin', (req, res) => {
           .then(user => {
             res.json(user[0])
           })
-          .catch(err => res.status(400).json('unable to get user'))
+          .catch(_err => res.status(400).json('unable to get user'))
       } else {
         res.status(400).json('wrong credentials')
       }
     })
-    .catch(err => res.status(400).json('wrong credentials'))
+    .catch(_err => res.status(400).json('wrong credentials'))
 })
 
 app.post('/register', (req, res) => {
@@ -74,7 +75,9 @@ app.post('/register', (req, res) => {
       .then(trx.commit)
       .catch(trx.rollback)
     })
-    .catch(err => res.status(400).json('unable to register'))
+    .catch(_err => {
+      return res.status(400).json('unable to register');
+    })
 })
 
 app.get('/profile/:id', (req, res) => {
@@ -87,12 +90,12 @@ app.get('/profile/:id', (req, res) => {
         res.status(400).json('Not found')
       }
     })
-    .catch(err => res.status(400).json('error getting user'))
+    .catch( err => res.status(400).json('error getting user'))
 })
 
 app.put('/image', (req, res) => {
-  const { id } = req.body;
-  db('users').where('id', '=', id)
+  const { email } = req.body;
+  db('users').where('email', '=', email)
   .increment('entries', 1)
   .returning('entries')
   .then(entries => {
@@ -102,7 +105,9 @@ app.put('/image', (req, res) => {
     // entries[0].entries --> this now returns the entries
     res.json(entries[0].entries);
   })
-  .catch(err => res.status(400).json('unable to get entries'))
+  .catch(_err => {
+    return res.status(400).json('unable to get entries');
+  })
 })
 
 app.listen(3000, ()=> {
