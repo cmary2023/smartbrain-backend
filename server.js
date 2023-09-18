@@ -17,7 +17,7 @@ const db = knex({
     host: "postgres://smartdb_pez7_user:9S3prdrEDCGgC38SxueRZ6MqQKQ02NUy@dpg-ck4aba6ct0pc738lvplg-a.oregon-postgres.render.com/smartdb_pez7",
     port:5432,
     user: "postgres",
-    password: "test",
+    password: "",
     database: "smartdb"
   }
 })
