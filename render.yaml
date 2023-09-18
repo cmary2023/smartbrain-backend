@@ -1,7 +1,7 @@
 databases:
-  - name: mysite
-    databaseName: mysite
-    user: mysite
+  - name: smartdb
+    databaseName:smartdb_pez7
+    user:smartdb_pez7_user
 
  services:
  - type: pserv
