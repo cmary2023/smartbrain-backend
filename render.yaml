@@ -10,7 +10,7 @@ databases:
    plan: standard
    repo: https://github.com/render-oss/docker-pgbouncer
    envVars:
-   - key: DATABASE_URL
+   - key: postgres://smartdb_pez7_user:9S3prdrEDCGgC38SxueRZ6MqQKQ02NUy@dpg-ck4aba6ct0pc738lvplg-a/smartdb_pez7
      fromDatabase:
        name: mysite
        property: connectionString
