@@ -1,9 +1,9 @@
 databases:
   - name: smartdb
-    databaseName:smartdb_pez7
-    user:smartdb_pez7_user
+    databaseName: smartdb_pez7
+    user: smartdb_pez7_user
 
- services:
+ services: 
  - type: pserv
    name: pgbouncer
    runtime: docker
