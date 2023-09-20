@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser'); // latest version of exressJS now comes with Body-Parser!
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt-nodejs');// Using npm package bcrypt to encrypt password
 const cors = require('cors');
-const knex = require('knex');
+const knex = require('knex');// Using npm package knex to connect server with database
 
 const register = require('./controllers/register');
 const signin = require('./controllers/signin');
@@ -11,7 +11,7 @@ const image = require('./controllers/image');
 
 
 
-const db = knex({
+const db = knex({// db is an alias for database
   // Enter your own database information here based on what you created
   client: 'pg',
   connection: {
@@ -36,6 +36,33 @@ app.post('/register', (req, res) => { register.handleRegister(req, res, db, bcry
 app.get('/profile/:id', (req, res) => { profile.handleProfileGet(req, res, db)}) 
 app.put('/image', (req, res) => { image.handleImage(req, res, db)})
 app.post('/imageurl', (req, res) => { image.handleApiCall(req, res)})
+/*********** Overview ***********
+/ --> res = this is working
+/signin --> POST = success/fail
+/register --> POST = user
+/profile/:userId --> GET = user
+/image --> PUT --> user
+*********************************/
+
+/********* Table Queries *********
+
+> Users Table
+CREATE TABLE users (
+	id serial PRIMARY KEY,
+	name VARCHAR(100),
+	email text UNIQUE NOT NULL,
+	entries BIGINT DEFAULT 0,
+	joined TIMESTAMP NOT NULL
+);
+
+> Login Table
+CREATE TABLE login (
+	id serial PRIMARY KEY,
+	hash VARCHAR(100) NOT NULL,
+	email text UNIQUE NOT NULL
+);
+
+*********************************/
 
 
 
