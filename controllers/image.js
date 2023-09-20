@@ -4,7 +4,7 @@ const Clarifai = require('clarifai');
 const app = new Clarifai.App({
     apiKey: 'c695d8d53fe34b1b8bd446307ac2fb9f'
    });
-
+/* Others models: https://github.com/Clarifai/clarifai-javascript/blob/master/src/index.js */
    const handleApiCall = (req, res) => {
     // HEADS UP! Sometimes the Clarifai Models can be down or not working as they are constantly getting updated.
     // A good way to check if the model you are using is up, is to check them on the clarifai website. For example,
@@ -12,16 +12,16 @@ const app = new Clarifai.App({
     // If that isn't working, then that means you will have to wait until their servers are back up. 
   
     app.models.predict('face-detection', req.body.input)
-      .then(data => {
+      .then(data => { // sending response to front-end from API
         res.json(data);
       })
       .catch(err => res.status(400).json('unable to work with API'))
   }
 const handleImage = (req, res, db) => {
-  const { id } = req.body;
-  db('users').where('id', '=', id)
+  const { id } = req.body;// id comes from the front-end
+  db('users').where('id', '=', id)// searching for requested id into users_table 
   .increment('entries', 1)
-  .returning('entries')
+  .returning('entries')// returning entries to the front end for that user_id
   .then(entries => {
     // If you are using knex.js version 1.0.0 or higher this now returns an array of objects. Therefore, the code goes from:
     // entries[0] --> this used to return the entries
